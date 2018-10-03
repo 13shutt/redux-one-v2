@@ -1,8 +1,5 @@
 import React from 'react'
 
-import { connect } from 'react-redux'
-import { fetchJokes } from './duck/actions'
-
 import { Buttonz, BodyList } from '../../components'
 
 const JokesList = (props) => {
@@ -20,4 +17,4 @@ const JokesList = (props) => {
   );
 }
  
-export default connect(null, { fetchJokes })(JokesList)
+export default JokesList
