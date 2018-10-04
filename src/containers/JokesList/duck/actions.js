@@ -1,11 +1,10 @@
-import { FETCH_JOKES } from './constants';
+import { FETCH_JOKE } from './constants';
 
-export const fetchJokes = (e) => dispatch => {
-  console.log('fetching')
+export const fetchJoke = (e) => dispatch => {
   fetch('http://api.icndb.com/jokes/random/')
     .then(res => res.json())
     .then(jokes => dispatch({
-      type: FETCH_JOKES,
+      type: FETCH_JOKE,
       payload: jokes
     }))
   e.preventDefault()

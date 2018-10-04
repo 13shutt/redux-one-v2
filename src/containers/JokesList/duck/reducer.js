@@ -1,13 +1,12 @@
-import { FETCH_JOKES } from './constants';
+import { FETCH_JOKE } from './constants';
 
 const initialState = {
   items: []
 };
 
-function fetchJokesReducer(state = initialState, action) {
+function jokesReducer(state = initialState, action) {
   switch (action.type) {
-    case FETCH_JOKES:
-    console.log(state)
+    case FETCH_JOKE:
     return {
       items: [...state.items, action.payload],
     };
@@ -16,4 +15,4 @@ function fetchJokesReducer(state = initialState, action) {
   }
 }
 
-export default fetchJokesReducer;
+export default jokesReducer;

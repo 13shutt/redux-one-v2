@@ -1,17 +1,17 @@
 import React from 'react'
 
-import { Buttonz, BodyList } from '../../components'
+import { Buttonz, BodyList, StyledUl, StyledOl } from '../../components'
 
 const JokesList = (props) => {
-  {console.log(props.jokes)}
   return (    
     <div>
       <BodyList>
-        <form>
-          <h4>Get some Chuck Norris jokes</h4>
-          <input type="text"/>
-          <Buttonz onClick={props.actions.fetchJokes} type="submit">Get Jokes! :D</Buttonz>
-        </form>
+          <h4>Get some Chuck Norris jokes from API</h4>
+          <br /> 
+          <Buttonz onClick={props.actions.fetchJoke} type="submit">Get Joke! :D</Buttonz>
+          {<StyledUl>
+            {props.jokes.items.map((item, index) => <StyledOl key={index}>{item.value.joke}</StyledOl>)}
+          </StyledUl>}
       </BodyList>
     </div>
   );
