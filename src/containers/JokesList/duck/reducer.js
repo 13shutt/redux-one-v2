@@ -1,19 +1,18 @@
 import { FETCH_JOKES } from './constants';
 
 const initialState = {
-  jokes: [],
+  items: []
 };
 
 function fetchJokesReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_JOKES:
-      console.log('reducer')
-      return {
-        ...state,
-        ...action.payload,
-      };
+    console.log(state)
+    return {
+      items: [...state.items, action.payload],
+    };
     default:
-      return state;
+    return state;
   }
 }
 
