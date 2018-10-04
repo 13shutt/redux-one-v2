@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Buttonz, BodyList, StyledUl, StyledOl } from '../../components'
+import { Buttonz, BodyList, StyledUl, StyledOl, Delete } from '../../components'
 
 const JokesList = (props) => {
   return (    
@@ -10,7 +10,13 @@ const JokesList = (props) => {
           <br /> 
           <Buttonz onClick={props.actions.fetchJoke} type="submit">Get Joke! :D</Buttonz>
           {<StyledUl>
-            {props.jokes.items.map((item, index) => <StyledOl key={index}>{item.value.joke}</StyledOl>)}
+            {props.jokes.items.map(
+              (item, index) => 
+                <StyledOl key={index}>
+                  {item.value.joke} 
+                  <Delete onClick={() => props.actions.deleteJoke(index)}>X</Delete>
+                </StyledOl>
+            )}
           </StyledUl>}
       </BodyList>
     </div>

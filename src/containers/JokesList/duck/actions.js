@@ -1,6 +1,6 @@
-import { FETCH_JOKE } from './constants';
+import { FETCH_JOKE, DELETE_JOKE } from './constants';
 
-export const fetchJoke = (e) => dispatch => {
+const fetchJoke = (e) => dispatch => {
   fetch('http://api.icndb.com/jokes/random/')
     .then(res => res.json())
     .then(jokes => dispatch({
@@ -9,3 +9,12 @@ export const fetchJoke = (e) => dispatch => {
     }))
   e.preventDefault()
 }
+
+const deleteJoke = (item) => dispatch => {
+  dispatch({
+    type: DELETE_JOKE,
+    payload: item
+  })
+}
+
+export { fetchJoke, deleteJoke }
