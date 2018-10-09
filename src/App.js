@@ -4,7 +4,7 @@ import { createBrowserHistory } from 'history'
 import { ConnectedRouter } from 'connected-react-router'
 
 import { initStyles } from './styles'
-import configureStore from './configureStore'
+import configureStore from './store/configureStore'
 
 import AppContainer from './containers/AppContainer'
 

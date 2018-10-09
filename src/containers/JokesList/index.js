@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { fetchJoke, deleteJoke } from './duck/actions'
+import { fetchJoke, deleteJoke } from '../../store/JokesList/actions'
 
 import JokesList from './JokesList'
 
