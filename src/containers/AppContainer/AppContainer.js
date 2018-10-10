@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 
 import JokesList from '../JokesList'
+import GitUser from '../GitUser'
   
 const styles = {
   root: {
@@ -39,12 +40,14 @@ const AppContainer = (props) => {
             </Typography>
             <Button component={Link} color="inherit" to="/">Home</Button>
             <Button component={Link} color="inherit" to="/joke">Fetch one Joke</Button>
+            <Button component={Link} color="inherit" to="/git">Git User</Button>
           </Toolbar>
         </AppBar>
       </div>
       <Switch>
         <Route exact path="/" render={() => <div>Simple homepage</div>} />
         <Route path="/joke" component={() => <JokesList />} />
+        <Route path="/git" component={() => <GitUser />} />
       </Switch>
     </div>
   );
