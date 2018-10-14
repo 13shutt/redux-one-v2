@@ -1,0 +1,2 @@
+export const FETCH_PROFILE_DATA = 'FETCH_PROFILE_DATA'
+export const NAME_CHANGE = 'NAME_CHANGE'

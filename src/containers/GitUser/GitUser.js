@@ -1,12 +1,18 @@
 import React from 'react';
-import { apiUserRequest, apiReposRequest } from '../../utils/github-api'
 
-const GitUser = () => {
-  console.log(apiUserRequest('13shutt'))
-  console.log(apiReposRequest('13shutt'))
+const GitUser = (props) => {
+
+  const call = (e) => {
+    e.preventDefault()
+    console.log(e.target.value)
+    props.actions.userName(e.target.value)
+  }
+
   return (
     <div>
-      git users
+      <form>
+        <input type="text" onInput={call}/>
+      </form>
     </div>
   );
 }

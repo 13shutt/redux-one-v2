@@ -39,21 +39,21 @@ const JokesList = (props) => {
           <Button onClick={props.actions.fetchJoke} variant="contained" color="primary" className={classes.button}>
             Get Joke! :D
           </Button>
-          <ol>
-            {props.jokes.items.map(
-              (item, index) => 
-              <ListItem key={index}>
-                <ListItemText
-                  primary={item.value.joke}
-                /> 
-                <ListItemSecondaryAction  onClick={() => props.actions.deleteJoke(index)}>
-                  <IconButton aria-label="Delete">
-                    <DeleteIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            )}
-          </ol>
+            <ol>
+              {props.jokes.items.map(
+                (item, index) => 
+                <ListItem key={index}>
+                  <ListItemText
+                    primary={item.value.joke}
+                  /> 
+                  <ListItemSecondaryAction  onClick={() => props.actions.deleteJoke(index)}>
+                    <IconButton aria-label="Delete">
+                      <DeleteIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              )}
+            </ol>
         </Typography>
       </Paper>
     </div>
