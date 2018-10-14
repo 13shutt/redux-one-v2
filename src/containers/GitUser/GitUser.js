@@ -3,9 +3,9 @@ import React from 'react';
 const GitUser = (props) => {
 
   const call = (e) => {
-    e.preventDefault()
     console.log(e.target.value)
     props.actions.userName(e.target.value)
+    props.actions.fetchProfile(e.target.value)
   }
 
   return (

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { userName } from '../../store/GitUser/actions'
+import { userName, fetchProfile } from '../../store/GitUser/actions'
 
 import GitUser from './GitUser'
 
@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({
-    userName
+    userName, fetchProfile
   }, dispatch)
 })
 

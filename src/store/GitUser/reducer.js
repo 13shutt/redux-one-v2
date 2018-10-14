@@ -10,8 +10,9 @@ function profileReducer(state = initialState, action) {
   switch (action.type) {
 
     case FETCH_PROFILE_DATA:
+    console.log('success', action.payload)
     return {
-      profile: [...state.profile, action.payload],
+      profile: action.payload
     };
 
     case NAME_CHANGE:
