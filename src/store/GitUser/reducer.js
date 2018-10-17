@@ -1,7 +1,8 @@
 import { FETCH_PROFILE_DATA } from './constants';
 
 const initialState = {
-  data: {}
+  repos: {},
+  user: {}
 };
 
 function profileReducer(state = initialState, action) {
@@ -10,7 +11,8 @@ function profileReducer(state = initialState, action) {
     case FETCH_PROFILE_DATA:
     console.log('success', action.payload)
     return {
-      data: action.payload
+      repos: action.payload.repos,
+      user: action.payload.user
     };
 
     default:
