@@ -1,9 +1,7 @@
-import { FETCH_PROFILE_DATA, NAME_CHANGE } from './constants';
+import { FETCH_PROFILE_DATA } from './constants';
 
 const initialState = {
-  username: [],
-  profile: [],
-  repos: []
+  data: {}
 };
 
 function profileReducer(state = initialState, action) {
@@ -12,14 +10,8 @@ function profileReducer(state = initialState, action) {
     case FETCH_PROFILE_DATA:
     console.log('success', action.payload)
     return {
-      profile: action.payload
+      data: action.payload
     };
-
-    case NAME_CHANGE:
-    console.log('success', action.payload)
-    return {
-      username: action.payload
-    }
 
     default:
     return state;

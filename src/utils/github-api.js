@@ -17,24 +17,23 @@ function fetchReposData(user) {
   return `https://api.github.com/users/${user}/repos?per_page=${apiSettings.repos_count}&sort=${apiSettings.repos_sort}&client_id=${apiSettings.client_id}&client_secret=${apiSettings.client_secret}`
 }
 
-function checkStatus(response) {
-  if (response.status === 200) {
-    return response
+// function checkStatus(response) {
+//   return response
+// }
+
+// function parseJSON(response) {
+//   return response.json()
+// }
+
+export async function apiRequest(name) {
+  const userResponse = await fetch(fetchUserData(name))
+  const reposResponse = await fetch(fetchReposData(name))
+
+  const user = await userResponse.json()
+  const repos = await reposResponse.json() 
+
+  return {
+    user,
+    repos
   }
-}
-
-function parseJSON(response) {
-  return response.json()
-}
-
-export function apiUserRequest(user) {
-  return fetch(fetchUserData(user))
-    .then(checkStatus)
-    .then(parseJSON)
-}
-
-export function apiReposRequest(user) {
-  return fetch(fetchReposData(user))
-    .then(checkStatus)
-    .then(parseJSON)
 }

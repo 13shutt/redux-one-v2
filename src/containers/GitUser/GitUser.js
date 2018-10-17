@@ -4,8 +4,8 @@ const GitUser = (props) => {
 
   const call = (e) => {
     console.log(e.target.value)
-    props.actions.userName(e.target.value)
     props.actions.fetchProfile(e.target.value)
+    console.log(props.github, 'yspex')
   }
 
   return (
