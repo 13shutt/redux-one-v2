@@ -119,6 +119,13 @@ const GitUser = (props) => {
         </Typography>
         </div>
       </Paper>
+      <Paper className={classes.root} elevation={1}>
+        {props.github.repos.map((item, index) =>  
+          <div key={index}>
+            {item.name}, {item.language}
+          </div>
+        )}
+      </Paper>
     </div>
   );
 }
