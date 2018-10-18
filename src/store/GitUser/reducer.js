@@ -1,7 +1,7 @@
 import { FETCH_PROFILE_DATA } from './constants';
 
 const initialState = {
-  repos: {},
+  repos: [],
   user: {}
 };
 
