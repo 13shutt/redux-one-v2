@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
@@ -78,102 +78,104 @@ const styles = theme => ({
   }
 });
 
-const GitUser = props => {
-  const { classes } = props;
-  const call = e => {
-    e.preventDefault();
-    props.actions.fetchProfile(
-      e.target.children[0].children[1].children[0].value
+class GitUser extends Component {
+  constructor(props) {
+    super(props)
+  
+    const { classes } = props;
+    this.call = e => {
+      e.preventDefault();
+      props.actions.fetchProfile(
+        e.target.children[0].children[1].children[0].value
       );
       console.log(e.target.children[0].children[1].children[0].value);
     };
-    
-  const viewRepos = (from, to) => 
-    props.github.repos.slice(from, to).map((item, index) => (
-      <div className={classes.repo} key={index}> 
-        <Button href={item.html_url} color="primary" className={classes.button}>
-          {item.name}
-        </Button>
-        <div className={classes.repo} style={{width: "370px"}}>
-          <Typography variant="overline">updated {item.updated_at} ago</Typography>
-          <Chip
-            label={item.language}
-            className={classes.chip}
-            color="primary"
-          />
-        </div>
-      </div>
-  ))
-
-  const viewAllRepos = () => viewRepos(5, props.github.user.public_repos)
-
-  return (
-    <div>
-      <form onSubmit={call} className={classes.container} autoComplete="off">
-        <TextField
-          name="username"
-          label="username"
-          defaultValue="13shutt"
-          className={classes.textField}
-          margin="normal"
-        />
-        <Button variant="outlined" color="primary" type="submit">
-          Find user!
-        </Button>
-      </form>
-      <Paper className={classes.rootRow} elevation={1}>
-        <Avatar
-          src={props.github.user.avatar_url}
-          className={classNames(classes.avatar, classes.bigAvatar)}
-        />
-        <div className={classes.userData}>
-          <Typography variant="h5" gutterBottom>
-            Login: {props.github.user.login}
-          </Typography>
-          <Typography variant="h5" gutterBottom>
-            Name: {props.github.user.name}
-          </Typography>
-          <Typography variant="h5" gutterBottom>
-            Location: {props.github.user.location}
-          </Typography>
-          <Button href={props.github.user.html_url} variant="contained" color="primary">
-            github.com
-            <Link className={classes.icon} />
+      
+    this.viewRepos = (from, to) => 
+      props.github.repos.slice(from, to).map((item, index) => (
+        <div className={classes.repo} key={index}> 
+          <Button href={item.html_url} color="primary" className={classes.button}>
+            {item.name}
           </Button>
+          <div className={classes.repo} style={{width: "370px"}}>
+            <Typography variant="overline">updated {item.updated_at} ago</Typography>
+            <Chip
+              label={item.language}
+              className={classes.chip}
+              color="primary"
+            />
+          </div>
         </div>
-        <div className={classes.marginBot}>
-          <Typography variant="h6" gutterBottom className={classes.baseline}>
-            Repos: {props.github.user.public_repos}
-            <Note className={classes.icon} />
-          </Typography>
-          <Typography variant="h6" gutterBottom className={classes.baseline}>
-            Followers: {props.github.user.followers}
-            <People className={classes.icon} />
-          </Typography>
-          <Typography variant="h6" gutterBottom className={classes.baseline}>
-            Following: {props.github.user.following}
-            <PeopleOutline className={classes.icon} />
-          </Typography>
-        </div>
-        <div className={classes.marginBot}>
-          <Typography variant="overline" gutterBottom>
-            Created: {props.github.user.created_at}
-          </Typography>
-          <Typography variant="overline" gutterBottom>
-            Updated: {props.github.user.updated_at}
-          </Typography>
-        </div>
-      </Paper>
-      <Paper className={classes.rootCol} elevation={1}>
-        {viewRepos(0, 5)}
-        {viewAllRepos()}
-        {props.github.user.public_repos > 5 ? (
-        <Button color="primary" className={classes.button}>
-          Load More
-        </Button>) : null}
-      </Paper>
-    </div>
-  );
+    ))
+  }
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.call} className={this.classes.container} autoComplete="off">
+          <TextField
+            name="username"
+            label="username"
+            defaultValue="13shutt"
+            className={this.classes.textField}
+            margin="normal"
+          />
+          <Button variant="outlined" color="primary" type="submit">
+            Find user!
+          </Button>
+        </form>
+        <Paper className={this.classes.rootRow} elevation={1}>
+          <Avatar
+            src={this.props.github.user.avatar_url}
+            className={classNames(this.classes.avatar, this.classes.bigAvatar)}
+          />
+          <div className={this.classes.userData}>
+            <Typography variant="h5" gutterBottom>
+              Login: {this.props.github.user.login}
+            </Typography>
+            <Typography variant="h5" gutterBottom>
+              Name: {this.props.github.user.name}
+            </Typography>
+            <Typography variant="h5" gutterBottom>
+              Location: {this.props.github.user.location}
+            </Typography>
+            <Button href={this.props.github.user.html_url} variant="contained" color="primary">
+              github.com
+              <Link className={this.classes.icon} />
+            </Button>
+          </div>
+          <div className={this.classes.marginBot}>
+            <Typography variant="h6" gutterBottom className={this.classes.baseline}>
+              Repos: {this.props.github.user.public_repos}
+              <Note className={this.classes.icon} />
+            </Typography>
+            <Typography variant="h6" gutterBottom className={this.classes.baseline}>
+              Followers: {this.props.github.user.followers}
+              <People className={this.classes.icon} />
+            </Typography>
+            <Typography variant="h6" gutterBottom className={this.classes.baseline}>
+              Following: {this.props.github.user.following}
+              <PeopleOutline className={this.classes.icon} />
+            </Typography>
+          </div>
+          <div className={this.classes.marginBot}>
+            <Typography variant="overline" gutterBottom>
+              Created: {this.props.github.user.created_at}
+            </Typography>
+            <Typography variant="overline" gutterBottom>
+              Updated: {this.props.github.user.updated_at}
+            </Typography>
+          </div>
+        </Paper>
+        <Paper className={this.classes.rootCol} elevation={1}>
+          {this.viewRepos(0, 5)}
+          {this.props.github.user.public_repos > 5 ? (
+          <Button color="primary" className={this.classes.button}>
+            Load More
+          </Button>) : null}
+        </Paper>
+      </div>
+    );
+  }
 };
 
 export default withStyles(styles)(GitUser);
