@@ -1,7 +1,6 @@
 const apiSettings = {
   client_id: 'fa5f25b95c66f47b259d',
   client_secret: 'ffecb95109be87f42ecbb4cce1575bd471b4f585',
-  repos_count: 5,
   repos_sort: 'created: asc'
 }
 
@@ -14,7 +13,7 @@ function fetchUserData(user) {
 }
 
 function fetchReposData(user) {
-  return `https://api.github.com/users/${user}/repos?per_page=${apiSettings.repos_count}&sort=${apiSettings.repos_sort}&client_id=${apiSettings.client_id}&client_secret=${apiSettings.client_secret}`
+  return `https://api.github.com/users/${user}/repos?sort=${apiSettings.repos_sort}&client_id=${apiSettings.client_id}&client_secret=${apiSettings.client_secret}`
 }
 
 // function checkStatus(response) {
