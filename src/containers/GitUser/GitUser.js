@@ -10,11 +10,15 @@ import Note from "@material-ui/icons/Note";
 import People from "@material-ui/icons/People";
 import PeopleOutline from "@material-ui/icons/PeopleOutline";
 import TextField from "@material-ui/core/TextField";
+import Chip from '@material-ui/core/Chip';
 
 const styles = theme => ({
   marginBot: {
     margin: "0px 30px",
     marginBottom: "40px"
+  },
+  chip: {
+    margin: theme.spacing.unit,
   },
   container: {
     display: "flex",
@@ -47,7 +51,6 @@ const styles = theme => ({
     margin: "50px 170px",
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
   },
   text: {
     width: "100%",
@@ -66,6 +69,12 @@ const styles = theme => ({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "baseline"
+  },
+  repo: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "baseline",
+    justifyContent: "space-between"
   }
 });
 
@@ -75,9 +84,28 @@ const GitUser = props => {
     e.preventDefault();
     props.actions.fetchProfile(
       e.target.children[0].children[1].children[0].value
-    );
-    console.log(e.target.children[0].children[1].children[0].value);
-  };
+      );
+      console.log(e.target.children[0].children[1].children[0].value);
+    };
+    
+  const viewRepos = (from, to) => 
+    props.github.repos.slice(from, to).map((item, index) => (
+      <div className={classes.repo} key={index}> 
+        <Button href={item.html_url} color="primary" className={classes.button}>
+          {item.name}
+        </Button>
+        <div className={classes.repo} style={{width: "370px"}}>
+          <Typography variant="overline">updated {item.updated_at} ago</Typography>
+          <Chip
+            label={item.language}
+            className={classes.chip}
+            color="primary"
+          />
+        </div>
+      </div>
+  ))
+
+  const viewAllRepos = () => viewRepos(5, props.github.user.public_repos)
 
   return (
     <div>
@@ -137,12 +165,12 @@ const GitUser = props => {
         </div>
       </Paper>
       <Paper className={classes.rootCol} elevation={1}>
-        {props.github.repos.slice(0, 5).map((item, index) => (
-          <div key={index}>
-            {item.name}, {item.language}, {item.html_url}, {item.updated_at}
-          </div>
-        ))}
-        {props.github.user.public_repos > 5 ? (<div>Load More</div>) : null}
+        {viewRepos(0, 5)}
+        {viewAllRepos()}
+        {props.github.user.public_repos > 5 ? (
+        <Button color="primary" className={classes.button}>
+          Load More
+        </Button>) : null}
       </Paper>
     </div>
   );
