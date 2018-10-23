@@ -10,7 +10,7 @@ import Note from "@material-ui/icons/Note";
 import People from "@material-ui/icons/People";
 import PeopleOutline from "@material-ui/icons/PeopleOutline";
 import TextField from "@material-ui/core/TextField";
-import Chip from '@material-ui/core/Chip';
+import Chip from "@material-ui/core/Chip";
 
 const styles = theme => ({
   marginBot: {
@@ -18,7 +18,7 @@ const styles = theme => ({
     marginBottom: "40px"
   },
   chip: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing.unit
   },
   container: {
     display: "flex",
@@ -50,7 +50,7 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 4,
     margin: "50px 170px",
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "column"
   },
   text: {
     width: "100%",
@@ -80,9 +80,8 @@ const styles = theme => ({
 
 class GitUser extends Component {
   constructor(props) {
-    super(props)
-  
-    const { classes } = props;
+    super(props);
+
     this.call = e => {
       e.preventDefault();
       props.actions.fetchProfile(
@@ -90,45 +89,57 @@ class GitUser extends Component {
       );
       console.log(e.target.children[0].children[1].children[0].value);
     };
-      
-    this.viewRepos = (from, to) => 
+
+    this.viewRepos = (from, to) =>
       props.github.repos.slice(from, to).map((item, index) => (
-        <div className={classes.repo} key={index}> 
-          <Button href={item.html_url} color="primary" className={classes.button}>
+        <div className={this.classes.repo} key={index}>
+          <Button
+            href={item.html_url}
+            color="primary"
+            className={this.classes.button}
+          >
             {item.name}
           </Button>
-          <div className={classes.repo} style={{width: "370px"}}>
-            <Typography variant="overline">updated {item.updated_at} ago</Typography>
+          <div className={this.classes.repo} style={{ width: "370px" }}>
+            <Typography variant="overline">
+              updated {item.updated_at} ago
+            </Typography>
             <Chip
               label={item.language}
-              className={classes.chip}
+              className={this.classes.chip}
               color="primary"
             />
           </div>
         </div>
-    ))
+      ));
   }
+
   render() {
+    const { classes } = this.props;
     return (
       <div>
-        <form onSubmit={this.call} className={this.classes.container} autoComplete="off">
+        <form
+          onSubmit={this.call}
+          className={classes.container}
+          autoComplete="off"
+        >
           <TextField
             name="username"
             label="username"
             defaultValue="13shutt"
-            className={this.classes.textField}
+            className={classes.textField}
             margin="normal"
           />
           <Button variant="outlined" color="primary" type="submit">
             Find user!
           </Button>
         </form>
-        <Paper className={this.classes.rootRow} elevation={1}>
+        <Paper className={classes.rootRow} elevation={1}>
           <Avatar
             src={this.props.github.user.avatar_url}
-            className={classNames(this.classes.avatar, this.classes.bigAvatar)}
+            className={classNames(classes.avatar, classes.bigAvatar)}
           />
-          <div className={this.classes.userData}>
+          <div className={classes.userData}>
             <Typography variant="h5" gutterBottom>
               Login: {this.props.github.user.login}
             </Typography>
@@ -138,26 +149,30 @@ class GitUser extends Component {
             <Typography variant="h5" gutterBottom>
               Location: {this.props.github.user.location}
             </Typography>
-            <Button href={this.props.github.user.html_url} variant="contained" color="primary">
+            <Button
+              href={this.props.github.user.html_url}
+              variant="contained"
+              color="primary"
+            >
               github.com
-              <Link className={this.classes.icon} />
+              <Link className={classes.icon} />
             </Button>
           </div>
           <div className={this.classes.marginBot}>
-            <Typography variant="h6" gutterBottom className={this.classes.baseline}>
+            <Typography variant="h6" gutterBottom className={classes.baseline}>
               Repos: {this.props.github.user.public_repos}
               <Note className={this.classes.icon} />
             </Typography>
-            <Typography variant="h6" gutterBottom className={this.classes.baseline}>
+            <Typography variant="h6" gutterBottom className={classes.baseline}>
               Followers: {this.props.github.user.followers}
               <People className={this.classes.icon} />
             </Typography>
-            <Typography variant="h6" gutterBottom className={this.classes.baseline}>
+            <Typography variant="h6" gutterBottom className={classes.baseline}>
               Following: {this.props.github.user.following}
-              <PeopleOutline className={this.classes.icon} />
+              <PeopleOutline className={classes.icon} />
             </Typography>
           </div>
-          <div className={this.classes.marginBot}>
+          <div className={classes.marginBot}>
             <Typography variant="overline" gutterBottom>
               Created: {this.props.github.user.created_at}
             </Typography>
@@ -166,16 +181,17 @@ class GitUser extends Component {
             </Typography>
           </div>
         </Paper>
-        <Paper className={this.classes.rootCol} elevation={1}>
+        <Paper className={classes.rootCol} elevation={1}>
           {this.viewRepos(0, 5)}
           {this.props.github.user.public_repos > 5 ? (
-          <Button color="primary" className={this.classes.button}>
-            Load More
-          </Button>) : null}
+            <Button color="primary" className={classes.button}>
+              Load More
+            </Button>
+          ) : null}
         </Paper>
       </div>
     );
   }
-};
+}
 
 export default withStyles(styles)(GitUser);
